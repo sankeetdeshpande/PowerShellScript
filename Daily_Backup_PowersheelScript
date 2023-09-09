@@ -1,0 +1,21 @@
+#This script will only work based on specific date specified.
+
+# Define source and destination paths
+# "E:\abc" ans "E:\xyz" are just for reference
+
+$sourcePath = "E:\abc"
+$destinationPath = "E:\xyz"
+
+# Get the current date
+$currentDate = Get-Date -Format "ddmmyyyy"
+
+# Get the files modified today from the source directory
+$filesToCopy = Get-ChildItem -Path $sourcePath\* | Where-Object { $_.LastWriteTime.Date -eq (Get-Date).Date }
+
+# Copy the files to the destination directory
+$filesToCopy | ForEach-Object {
+    $destinationFilePath = Join-Path -Path $destinationPath -ChildPath $_.Name
+    Copy-Item -Path $_.FullName -Destination $destinationFilePath -Recurse -Force
+}
+
+Write-Host "Backup completed successfully."
