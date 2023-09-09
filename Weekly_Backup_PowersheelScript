@@ -1,0 +1,17 @@
+#This script will copy/sync all content from source to destination.
+
+# Define source and destination paths
+
+# Define source and destination paths
+# "E:\abc" ans "E:\xyz" are just for reference
+
+$sourcePath = "E:\abc"
+$destinationPath = "E:\xyz"
+
+# Get the current date
+$currentDate = Get-Date -Format "ddmmyyyy"
+
+# Copy only today's data from source to destination
+Copy-Item -Path "$sourcePath\*" -Destination $destinationPath -Recurse -Force
+
+Write-Host "Backup completed successfully."
